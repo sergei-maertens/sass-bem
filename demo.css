@@ -3,11 +3,15 @@
 }
 
 .block.block--modififier {
-  color: red;
+  color: black;
 }
 
 .block.block--modififier .block__element {
-  color: green;
+  color: yellow;
+}
+
+.block .block__element.block__element--modifier {
+  color: red;
 }
 
 .block .block__element {

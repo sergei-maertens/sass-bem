@@ -3,18 +3,26 @@
 .block {
   display: block;
 
-  @include modifier('modififier') {
-    color: red;
+  @include --m('modififier') {
+    color: black;
 
-    @include element('element') {
-      color: green;
+    @include __e('element') {
+      color: yellow;
     }
   }
 
-  @include element('element') {
+  @include --m('modifier') {
+    @include __e('element') {
+      @include --m('modifier') {
+        color: red;
+      }
+    }
+  }
+
+  @include __e('element') {
     font-weight: bold;
 
-    @include modifier('modifier') {
+    @include --m('modifier') {
       color: magenta;
     }
   }

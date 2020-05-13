@@ -74,3 +74,16 @@
     @content;
   }
 }
+
+// define shorthands
+@mixin __e($e) {
+  @include element($e) {
+    @content;
+  }
+}
+
+@mixin --m($m) {
+  @include modifier($m) {
+    @content;
+  }
+}
