@@ -1,0 +1,17 @@
+@import "bem";
+
+.block {
+  display: block;
+
+  @include modifier('modififier') {
+    color: red;
+  }
+
+  @include element('element') {
+    font-weight: bold;
+
+    @include modifier('modifier') {
+      color: magenta;
+    }
+  }
+}

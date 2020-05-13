@@ -1,0 +1,15 @@
+.block {
+  display: block;
+}
+
+.block--modififier {
+  color: red;
+}
+
+.block .block__element {
+  font-weight: bold;
+}
+
+.block .block__element.block__element--modifier {
+  color: magenta;
+}
