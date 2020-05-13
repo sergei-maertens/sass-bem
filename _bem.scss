@@ -54,20 +54,23 @@
   }
 }
 
+/// Apply a modifier to a block or an element.
+///
+/// @param {string} $modifier
+///   The name of the modifier to apply.
 @mixin modifier($modifier) {
-  $block: nth(simple-selectors(&), 1);
-
   $selector: null;
+  $bits: str-split(quote(&), " ");
 
-  // detect if we're in a block or an element
-  @if ( $block == "#{&}" ) {
+  @if ( length($bits) == 1 ) {
+    // block
     $selector: selector-append(&, "#{&}--#{$modifier}");
   } @else {
-    // since we're using bem, we _know_ that the second bit is the block__element selector
-    $bits: str-split("#{&}", " ");
+    // block__element
+    $block: nth($bits, 1);  // block, possibly with a modifier
     $element: nth($bits, 2);
-    $modified-element: selector-append(#{$element}, "--#{$modifier}");
-    $selector: "#{$block} #{$element}#{$modified-element}";
+    $element_with_modifier: selector-append($element, "#{$element}--#{$modifier}");;
+    $selector: "#{$block} #{$element_with_modifier}";
   }
 
   @at-root #{$selector} {
