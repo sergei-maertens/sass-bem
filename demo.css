@@ -2,8 +2,12 @@
   display: block;
 }
 
-.block--modififier {
+.block.block--modififier {
   color: red;
+}
+
+.block.block--modififier .block__element {
+  color: green;
 }
 
 .block .block__element {

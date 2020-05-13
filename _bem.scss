@@ -46,7 +46,10 @@
 /// @param {string} $element
 ///   The element within the block.
 @mixin element($element) {
-  & &__#{$element} {
+  // capture the block, even if there is a modifier on the block
+  $block: nth(simple-selectors(&), 1);
+  $selector: "#{&} #{$block}__#{$element}";
+  @at-root #{$selector} {
     @content;
   }
 }
@@ -58,7 +61,7 @@
 
   // detect if we're in a block or an element
   @if ( $block == "#{&}" ) {
-    $selector: selector-append(&, "--#{$modifier}");
+    $selector: selector-append(&, "#{&}--#{$modifier}");
   } @else {
     // since we're using bem, we _know_ that the second bit is the block__element selector
     $bits: str-split("#{&}", " ");
@@ -68,22 +71,6 @@
   }
 
   @at-root #{$selector} {
-    @content;
-  }
-}
-
-/// Apply styling to an element of a modified block.
-///
-/// @param  {string} $modifier
-///   Block modifier to target elements for
-/// @param  {string} $element
-///   Element within the modified block to target
-///
-@mixin modified-element($modifier, $element) {
-  // put .block and .block--modifier together into .block.block--modifier
-  $modified-block: selector-append(&, #{&--#{$modifier}});
-  // e.g. .block.block--modifier .element
-  @at-root #{$modified-block} &__#{$element} {
     @content;
   }
 }

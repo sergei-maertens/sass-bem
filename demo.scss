@@ -5,6 +5,10 @@
 
   @include modifier('modififier') {
     color: red;
+
+    @include element('element') {
+      color: green;
+    }
   }
 
   @include element('element') {
